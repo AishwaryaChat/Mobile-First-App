@@ -5,7 +5,8 @@ import {
   Route
 } from 'react-router-dom'
 
-const WIP = () => <h3>Dashboard</h3>
+// components
+import News from './news'
 
 export const AppRouter = () => {
   return (
@@ -14,7 +15,7 @@ export const AppRouter = () => {
         <Route
           exact
           path='/'
-          component={WIP}
+          component={News}
         />
       </Switch>
     </Router>
