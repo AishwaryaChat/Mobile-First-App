@@ -8,6 +8,10 @@ import { startFetchNews } from '../../redux/actions/news'
 // selectors
 import { getById, getAllIds } from '../../redux/reducers/news'
 
+// components
+import Layout from './layout'
+import MediaLayout from './mediaLayout'
+
 const mapStateToProps = state => ({
   byId: getById(state),
   allIds: getAllIds(state)
@@ -20,10 +24,20 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class NewsComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.parseHTML = this.parseHTML.bind(this)
+  }
+
   componentDidMount () {
     const { fetchNews } = this.props
     fetchNews()
   }
+
+  parseHTML (content) {
+    return ReactHtmlParser(content.slice(0, 50))
+  }
+
   render () {
     const { byId, allIds } = this.props
     return (
@@ -38,31 +52,16 @@ class NewsComponent extends Component {
               return (
                 <div key={id}>
                   <div className='panel panel-default'>
-                    <div className="row">
-                      <div className="col-md-9 col-xs-8">
-                        <div className="news-Headlines">
-                          <a href={attributes['source_url']}>
-                            {attributes['title']}
-                          </a>
-                        </div>
-                        <div className='panel-body'>
-                          <span className="news-body">{ReactHtmlParser(attributes.content.slice(0, 50))}</span>
-                        </div>
-                        <div className="news-author">
-                          <span>{attributes['author']} </span>
-                          <span>.</span>
-                          <span> {attributes['source']}</span>
-                        </div>
-                      </div>
-                      <div className="col-md-3 col-xs-4">
-                        <div className="news-image__container">
-                          <img
-                            className="img-thumbnail img-responsive"
-                            src={attributes['media_url']}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    {attributes['media_url'] === ''
+                      ? <Layout
+                        attributes={attributes}
+                        parseHTML={this.parseHTML}
+                      />
+                      : <MediaLayout
+                        attributes={attributes}
+                        parseHTML={this.parseHTML}
+                      />
+                    }
                   </div>
                 </div>
               )
