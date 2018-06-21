@@ -1,2 +1,14 @@
-.z {
-  background-color: inherit; }
+.news-image__container {
+  margin: 10px 10px 0 0; }
+
+.news-Headlines {
+  margin: 10px 0 0 10px; }
+  .news-Headlines a {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    font-size: 16px; }
+
+.news-author {
+  margin-left: 10px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6); }

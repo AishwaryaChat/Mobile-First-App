@@ -26,22 +26,48 @@ class NewsComponent extends Component {
   render () {
     const { byId, allIds } = this.props
     return (
-      <div>
-        <h3>Headlines</h3>
-        {
-          allIds.map((id, index) => {
-            const attributes = byId[id]['attributes']
-            return (
-              <div key={id}>
-                <h5><a href={attributes['source_url']}>{attributes['title']}</a></h5>
-                <div>
-                  <span>Author: {attributes['author']}</span>
-                  <span>{' '} Source: {attributes['source']}</span>
+      <div className='container'>
+        <div>
+          <div className='page-header'>
+            <h3>Headlines</h3>
+          </div>
+          {
+            allIds.map((id, index) => {
+              const attributes = byId[id]['attributes']
+              return (
+                <div key={id}>
+                  <div className='panel panel-default'>
+                    <div className="row">
+                      <div className="col-md-9 col-xs-8">
+                        <div className="news-Headlines">
+                          <a href={attributes['source_url']}>
+                            {attributes['title']}
+                          </a>
+                        </div>
+                        <div className='panel-body'>
+                          
+                        </div>
+                        <div className="news-author">
+                          <span>{attributes['author']} </span>
+                          <span>.</span>
+                          <span> {attributes['source']}</span>
+                        </div>
+                      </div>
+                      <div className="col-md-3 col-xs-4">
+                        <div className="news-image__container">
+                          <img
+                            className="img-thumbnail img-responsive"
+                            src={attributes['media_url']}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            )
-          })
-        }
+              )
+            })
+          }
+        </div>
       </div>
     )
   }

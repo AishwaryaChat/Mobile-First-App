@@ -5,6 +5,7 @@ import { configureStore } from './helpers/configureStore.js'
 import { Root } from './components/root.jsx'
 
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const store = configureStore()
 
