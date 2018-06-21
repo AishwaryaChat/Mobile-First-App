@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReactHtmlParser from 'react-html-parser'
 
 // action
 import { startFetchNews } from '../../redux/actions/news'
@@ -45,7 +46,7 @@ class NewsComponent extends Component {
                           </a>
                         </div>
                         <div className='panel-body'>
-                          
+                          <span className="news-body">{ReactHtmlParser(attributes.content.slice(0, 50))}</span>
                         </div>
                         <div className="news-author">
                           <span>{attributes['author']} </span>
